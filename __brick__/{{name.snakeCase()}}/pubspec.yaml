@@ -1,0 +1,46 @@
+name: {{name.snakeCase()}}
+description: Template flutter project with Amazon Cognito Auth.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  bloc_concurrency: ^0.2.0
+  cupertino_icons: ^1.0.4
+  data:
+    path: ./packages/data
+  domain:
+    path: ./packages/domain
+  environment:
+    path: ./packages/environment
+  equatable: ^2.0.3
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
+  formz: ^0.4.0
+  provider: ^6.0.2
+  widgetkit: ^0.3.1
+
+flutter_icons:
+  image_path: 'assets/launcher/logo_launcher.png'
+  adaptive_icon_background: '#ffffff'
+  adaptive_icon_foreground: 'assets/launcher/logo_launcher_adaptative.png'
+  android: 'ic_launcher'
+  ios: true
+  remove_alpha_ios: true
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.9.0
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^2.4.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - lang/en.json

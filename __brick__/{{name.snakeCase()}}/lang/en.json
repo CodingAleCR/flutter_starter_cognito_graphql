@@ -1,0 +1,20 @@
+{
+  "home_greeting": "Hello!",
+  "home_message": "This is a home page after authentication.",
+  "login_email_form_greeting": "Welcome!",
+  "login_email_form_message": "Enter your email to receive a verification code.",
+  "login_email_form_submit_action": "Submit",
+  "login_code_form_title": "Sign In",
+  "login_code_form_message": "A verification code has been sent via email. Enter the code below to verify your ID.",
+  "login_code_form_submit_action": "Verify",
+  "login_code_form_failure": "We could not verify your code. Please try again!",
+  "login_code_form_resend_message": "Didn't receive a code?",
+  "login_code_form_resend_action": "Resend",
+  "login_code_form_resend_success": "A verification code has been sent via email.",
+  "login_send_code_failure": "An error ocurred while sending the verification code. Please try again!",
+  "label_email": "Email",
+  "label_verification_code": "Verification Code",
+  "validation_email_invalid": "Invalid email address.",
+  "validation_field_required": "This field is required.",
+  "validation_min_length": "Field does not match the required length."
+}

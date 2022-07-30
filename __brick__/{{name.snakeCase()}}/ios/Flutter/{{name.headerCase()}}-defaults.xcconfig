@@ -1,0 +1,13 @@
+//
+//  Template-defaults.xcconfig
+//  Runner
+//
+//  Created by Alejandro Ulate on 8/6/21.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+{{name.upperCase()}}_APP_NAME=Template
+{{name.upperCase()}}_APP_SUFFIX=
+{{name.upperCase()}}_IOS_ICON=AppIcon

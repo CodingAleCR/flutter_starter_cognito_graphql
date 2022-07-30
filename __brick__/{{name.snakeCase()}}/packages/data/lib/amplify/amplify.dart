@@ -1,0 +1,1 @@
+export 'amplifyconfiguration.dart';

@@ -1,0 +1,11 @@
+name: environment
+description: Helper package to determine environment variables.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dev_dependencies:
+  test: ^1.17.10
+  very_good_analysis: ^3.0.1

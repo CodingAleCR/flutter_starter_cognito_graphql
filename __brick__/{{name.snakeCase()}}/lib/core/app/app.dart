@@ -8,12 +8,12 @@ import 'package:{{name.snakeCase()}}/core/theme/theme.dart';
 import 'package:{{name.snakeCase()}}/features/features.dart';
 
 /// {@template app}
-/// Template base app.
+/// {{name.pascalCase()}} app.
 ///
 /// {@endtemplate}
-class TemplateApp extends StatelessWidget {
+class {{name.pascalCase()}}App extends StatelessWidget {
   /// {@macro app}
-  const TemplateApp({Key? key}) : super(key: key);
+  const {{name.pascalCase()}}App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class TemplateApp extends StatelessWidget {
 }
 
 /// {@template app_state}
-/// State for the [TemplateApp].
+/// State for the [{{name.pascalCase()}}App].
 ///
 /// This is necessary in order to correctfully inject global BLOCs and use them
 /// in the app widget directly.
@@ -111,20 +111,17 @@ class AppViewState extends State<AppView> {
                         HomePage.route(),
                         (route) => false,
                       );
-                      break;
                     case AuthenticationStatus.unauthenticated:
                       _navigator?.pushAndRemoveUntil<void>(
                         PreloginPage.route(),
                         (route) => false,
                       );
-                      break;
 
                     case AuthenticationStatus.unknown:
                       _navigator?.pushAndRemoveUntil<void>(
                         SplashPage.route(),
                         (route) => false,
                       );
-                      break;
                   }
                 },
                 child: child,

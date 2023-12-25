@@ -14,7 +14,7 @@ import 'package:widgetkit/shared/shared.dart';
 /// {@endtemplate}
 class LoginPage extends StatelessWidget {
   /// {@macro login_page}
-  const LoginPage({required this.email, Key? key}) : super(key: key);
+  const LoginPage({required this.email, super.key});
 
   /// Route creation helper
   static Route<void> route({required String email}) {
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  const _Content({Key? key}) : super(key: key);
+  const _Content();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class _Content extends StatelessWidget {
           );
         }
 
-        if (state.status == FormzStatus.submissionFailure) {
+        if (state.status == FormzSubmissionStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.red[600],

@@ -16,7 +16,7 @@ import 'package:{{name.snakeCase()}}/features/auth/login/cubit/resend_code_statu
 /// {@endtemplate}
 class CodeForm extends StatelessWidget {
   /// macro email_form
-  const CodeForm({Key? key}) : super(key: key);
+  const CodeForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CodeForm extends StatelessWidget {
         const SizedBox(height: 56),
         Text(
           AppLocalizations.string(context, Strings.loginCodeFormMessage),
-          style: textTheme.bodyText2?.copyWith(),
+          style: textTheme.bodyMedium?.copyWith(),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 48),
@@ -38,7 +38,7 @@ class CodeForm extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             AppLocalizations.string(context, Strings.labelVerificationCode),
-            style: textTheme.caption?.copyWith(
+            style: textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
@@ -55,7 +55,7 @@ class CodeForm extends StatelessWidget {
             Strings.loginCodeFormResendMessage,
           ),
           textAlign: TextAlign.center,
-          style: textTheme.caption?.copyWith(
+          style: textTheme.bodySmall?.copyWith(
             fontSize: 14,
           ),
         ),
@@ -67,7 +67,7 @@ class CodeForm extends StatelessWidget {
 }
 
 class _CodeInput extends StatelessWidget {
-  const _CodeInput({Key? key}) : super(key: key);
+  const _CodeInput();
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +81,12 @@ class _CodeInput extends StatelessWidget {
           maxLength: 6,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           autocorrect: false,
-          enabled: state.status != FormzStatus.submissionInProgress,
+          enabled: state.status != FormzSubmissionStatus.inProgress,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             isDense: true,
             counter: const Offstage(),
-            errorText: state.code.invalid
+            errorText: state.code.displayError != null
                 ? state.code.error == MinLengthError.empty
                     ? AppLocalizations.string(context, Strings.requiredInvalid)
                     : AppLocalizations.string(context, Strings.minLengthInvalid)
@@ -99,19 +99,21 @@ class _CodeInput extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({Key? key}) : super(key: key);
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      buildWhen: (previous, current) =>
+          previous.status != current.status ||
+          previous.isValid != current.isValid,
       builder: (context, state) {
-        return state.status == FormzStatus.submissionInProgress
+        return state.status == FormzSubmissionStatus.inProgress
             ? const Center(child: CircularProgressIndicator())
             : FractionallySizedBox(
                 widthFactor: 1,
                 child: ElevatedButton(
-                  onPressed: state.status.isValidated
+                  onPressed: state.isValid
                       ? () => context.read<LoginCubit>().verifyCode()
                       : null,
                   child: Text(
@@ -128,7 +130,7 @@ class _SubmitButton extends StatelessWidget {
 }
 
 class _ResendCodeButton extends StatelessWidget {
-  const _ResendCodeButton({Key? key}) : super(key: key);
+  const _ResendCodeButton();
 
   @override
   Widget build(BuildContext context) {

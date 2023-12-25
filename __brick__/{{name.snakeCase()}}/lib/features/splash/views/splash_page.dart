@@ -7,7 +7,7 @@ import 'package:{{name.snakeCase()}}/core/widgets/widgets.dart';
 /// {@endtemplate}
 class SplashPage extends StatelessWidget {
   /// {@macro splash_page}
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   /// Route creation helper
   static Route<void> route() {

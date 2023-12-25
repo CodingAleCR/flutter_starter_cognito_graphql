@@ -4,7 +4,8 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0 <4.0.0'
 
 dependencies:
   bloc_concurrency: ^0.2.0
@@ -21,9 +22,9 @@ dependencies:
   flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  formz: ^0.4.0
+  formz: ^0.6.1
   provider: ^6.0.2
-  widgetkit: ^0.3.1
+  widgetkit: ^0.4.0
 
 flutter_icons:
   image_path: 'assets/launcher/logo_launcher.png'
@@ -34,10 +35,10 @@ flutter_icons:
   remove_alpha_ios: true
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.9.0
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^2.4.0
+  very_good_analysis: ^5.1.0
 
 flutter:
   uses-material-design: true

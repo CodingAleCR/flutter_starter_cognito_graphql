@@ -1,9 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
-import 'package:formz/formz.dart';
 import 'package:{{name.snakeCase()}}/core/validation/validation.dart';
 import 'package:{{name.snakeCase()}}/features/auth/login/cubit/resend_code_status.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
 part 'login_state.dart';
 
@@ -27,7 +27,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(
       state.copyWith(
         code: code,
-        status: Formz.validate([code]),
       ),
     );
   }
@@ -37,15 +36,15 @@ class LoginCubit extends Cubit<LoginState> {
   /// If the code does not match with the one sent to the user then it should
   /// return an exception.
   Future<void> verifyCode() async {
-    if (!state.status.isValidated) return;
-    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    if (state.isNotValid) return;
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authService.verifyCode(code: state.code.value);
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on Exception {
-      emit(state.copyWith(status: FormzStatus.submissionFailure));
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
     } finally {
-      emit(state.copyWith(status: FormzStatus.valid));
+      emit(state.copyWith(status: FormzSubmissionStatus.initial));
     }
   }
 

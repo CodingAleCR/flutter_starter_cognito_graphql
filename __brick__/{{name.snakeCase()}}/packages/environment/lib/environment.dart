@@ -1,3 +1,5 @@
+/// Environment library.
+/// Allows you to share configuration between the different modules.
 library environment;
 
 /// Environment configuration.
@@ -5,7 +7,7 @@ class EnvironmentConfig {
   /// App name to be displayed in home screen.
   static const appName = String.fromEnvironment(
     '{{name.constantCase()}}_APP_NAME',
-    defaultValue: 'Template',
+    defaultValue: '{{name.titleCase()}}',
   );
 
   /// Version of the API used in the app.

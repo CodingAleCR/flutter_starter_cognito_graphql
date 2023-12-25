@@ -6,29 +6,30 @@ import 'package:data/graphql/graphql.dart';
 import 'package:domain/domain.dart';
 
 /// Implementation of Auth Service with Cognito as source of truth.
-// ignore_for_file: implicit_dynamic_parameter, avoid_dynamic_calls
 class AuthServiceImpl extends AuthService {
   /// macro auth_service_impl
   AuthServiceImpl() {
-    _userSubscription = Amplify.Hub.listen([HubChannel.Auth], _onAuthChange);
+    _userSubscription = Amplify.Hub.listen(HubChannel.Auth, _onAuthChange);
     _refreshAuthStatus();
   }
 
   final StreamController<User?> _userController = StreamController();
 
-  late StreamSubscription<HubEvent> _userSubscription;
+  late StreamSubscription<AuthHubEvent> _userSubscription;
 
-  void _onAuthChange(HubEvent hubEvent) {
-    switch (hubEvent.eventName) {
-      case 'SIGNED_IN':
+  void _onAuthChange(AuthHubEvent hubEvent) {
+    switch (hubEvent.type) {
+      case AuthHubEventType.signedIn:
         {
           _authenticated();
         }
-        break;
-      case 'SIGNED_OUT':
+      case AuthHubEventType.signedOut:
         {
           _unauthenticated();
         }
+      case AuthHubEventType.sessionExpired:
+      case AuthHubEventType.userDeleted:
+        // TODO(developer): Handle this case.
         break;
     }
   }
@@ -47,7 +48,7 @@ class AuthServiceImpl extends AuthService {
     try {
       await Amplify.Auth.signIn(
         username: email,
-        password: 'dummy',
+        password: 'P@ssw0rd',
       );
     } on AuthException catch (e) {
       throw AuthFailure.cognitoError(e.message);
@@ -115,13 +116,21 @@ class AuthServiceImpl extends AuthService {
         .value;
 
     // Fetching the session to get the id token.
-    final session = await Amplify.Auth.fetchAuthSession(
-      options: CognitoSessionOptions(getAWSCredentials: true),
-    ) as CognitoAuthSession;
-    final token = session.userPoolTokens!.idToken;
-
-    // Initializing GraphQL with bearer token.
-    await APIGraphQL.instance.initialize(bearerToken: token);
+    final session = await Amplify.Auth.getPlugin(
+      AmplifyAuthCognito.pluginKey,
+    ).fetchAuthSession();
+    try {
+      final token = session.userPoolTokensResult.value.idToken.toJson();
+      // Initializing GraphQL with bearer token.
+      await APIGraphQL.instance.initialize(bearerToken: token);
+    } on SignedOutException {
+      // the user is not signed in.
+    } on SessionExpiredException {
+      // the users session has expired.
+    } on NetworkException {
+      // the access and/or id token is expired but cannot be refreshed because the
+      // user is offline.
+    }
 
     // Fetching current participant's information.
     final currentParticipant =

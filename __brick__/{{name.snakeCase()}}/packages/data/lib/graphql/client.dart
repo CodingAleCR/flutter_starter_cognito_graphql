@@ -22,17 +22,17 @@ class APIGraphQL {
   }) async {
     // Create client
     try {
-      final _httpLink = HttpLink(
+      final httpLink = HttpLink(
         '${EnvironmentConfig.baseUrl}/graphql',
       );
 
-      final _authLink = AuthLink(getToken: () async => 'Bearer $bearerToken');
+      final authLink = AuthLink(getToken: () async => 'Bearer $bearerToken');
 
-      final _link = _authLink.concat(_httpLink);
+      final link = authLink.concat(httpLink);
 
       client = GraphQLClient(
         cache: GraphQLCache(),
-        link: _link,
+        link: link,
       );
     } on Exception {
       throw InitializationFailure();

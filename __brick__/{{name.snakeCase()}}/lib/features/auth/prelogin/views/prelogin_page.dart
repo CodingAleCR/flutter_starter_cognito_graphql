@@ -14,7 +14,7 @@ import 'package:widgetkit/shared/shared.dart';
 /// {@endtemplate}
 class PreloginPage extends StatelessWidget {
   /// {@macro prelogin_page}
-  const PreloginPage({Key? key}) : super(key: key);
+  const PreloginPage({super.key});
 
   /// Route creation helper
   static Route<void> route() {
@@ -37,20 +37,20 @@ class PreloginPage extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  const _Content({Key? key}) : super(key: key);
+  const _Content();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<PreloginCubit, PreloginState>(
       listener: (context, state) {
-        if (state.status == FormzStatus.submissionSuccess) {
+        if (state.status == FormzSubmissionStatus.success) {
           Navigator.push<void>(
             context,
             LoginPage.route(email: state.email.value),
           );
         }
 
-        if (state.status == FormzStatus.submissionFailure) {
+        if (state.status == FormzSubmissionStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               backgroundColor: Colors.red[600],

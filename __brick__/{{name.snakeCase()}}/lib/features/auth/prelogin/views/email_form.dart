@@ -13,7 +13,7 @@ import 'package:{{name.snakeCase()}}/features/auth/prelogin/cubit/prelogin_cubit
 /// {@endtemplate}
 class EmailForm extends StatelessWidget {
   /// macro email_form
-  const EmailForm({Key? key}) : super(key: key);
+  const EmailForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class EmailForm extends StatelessWidget {
         const SizedBox(height: 56),
         Text(
           AppLocalizations.string(context, Strings.loginEmailFormGreeting),
-          style: textTheme.headline5,
+          style: textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 10),
         Text(
           AppLocalizations.string(context, Strings.loginEmailFormMessage),
-          style: textTheme.bodyText2,
+          style: textTheme.bodyMedium,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 48),
@@ -41,7 +41,7 @@ class EmailForm extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             AppLocalizations.string(context, Strings.labelEmail),
-            style: textTheme.caption?.copyWith(
+            style: textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
@@ -57,7 +57,7 @@ class EmailForm extends StatelessWidget {
 }
 
 class _EmailInput extends StatelessWidget {
-  const _EmailInput({Key? key}) : super(key: key);
+  const _EmailInput();
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +70,11 @@ class _EmailInput extends StatelessWidget {
               context.read<PreloginCubit>().emailChanged(email),
           keyboardType: TextInputType.emailAddress,
           autocorrect: false,
-          enabled: state.status != FormzStatus.submissionInProgress,
+          enabled: state.status != FormzSubmissionStatus.inProgress,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
             isDense: true,
-            errorText: state.email.invalid
+            errorText: state.email.displayError != null
                 ? AppLocalizations.string(context, Strings.emailInvalid)
                 : null,
           ),
@@ -85,19 +85,18 @@ class _EmailInput extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({Key? key}) : super(key: key);
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PreloginCubit, PreloginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.status == FormzStatus.submissionInProgress
+        return state.status == FormzSubmissionStatus.inProgress
             ? const Center(child: CircularProgressIndicator())
             : FractionallySizedBox(
                 widthFactor: 1,
                 child: ElevatedButton(
-                  onPressed: state.status.isValidated
+                  onPressed: state.isValid
                       ? () =>
                           context.read<PreloginCubit>().sendVerificationCode()
                       : null,

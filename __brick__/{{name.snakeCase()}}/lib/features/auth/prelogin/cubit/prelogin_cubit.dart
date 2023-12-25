@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:{{name.snakeCase()}}/core/validation/validation.dart';
 
@@ -23,7 +23,6 @@ class PreloginCubit extends Cubit<PreloginState> {
     emit(
       state.copyWith(
         email: email,
-        status: Formz.validate([email]),
       ),
     );
   }
@@ -34,8 +33,8 @@ class PreloginCubit extends Cubit<PreloginState> {
   /// If the email/account combination does not exist then it should return an
   /// exception.
   Future<void> sendVerificationCode() async {
-    if (!state.status.isValidated) return;
-    emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    if (state.isNotValid) return;
+    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
       await _authService.logOut();
       await _authService.logIn(
@@ -43,11 +42,13 @@ class PreloginCubit extends Cubit<PreloginState> {
       );
       emit(
         state.copyWith(
-          status: FormzStatus.submissionSuccess,
+          status: FormzSubmissionStatus.success,
         ),
       );
     } on Exception {
-      emit(state.copyWith(status: FormzStatus.submissionFailure));
+      emit(state.copyWith(status: FormzSubmissionStatus.failure));
+    } finally {
+      emit(state.copyWith(status: FormzSubmissionStatus.initial));
     }
   }
 }

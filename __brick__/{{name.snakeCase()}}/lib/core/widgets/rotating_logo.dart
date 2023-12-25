@@ -11,8 +11,8 @@ import 'package:{{name.snakeCase()}}/core/widgets/widgets.dart';
 class RotatingLogo extends StatefulWidget {
   /// @macro rotating_template
   const RotatingLogo({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   RotatingLogoState createState() => RotatingLogoState();

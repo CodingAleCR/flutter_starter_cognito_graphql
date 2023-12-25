@@ -1,20 +1,23 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'session.freezed.dart';
+part 'session.g.dart';
 
 /// {@template session}
 /// Session model
 ///
 /// [Session.empty] represents an unitialized session.
 /// {@endtemplate}
-class Session extends Equatable {
+@freezed
+sealed class Session with _$Session {
   /// {@macro session}
-  const Session({required this.channelName});
+  const factory Session({required String channelName}) = _Session;
 
-  /// The current session channel name
-  final String channelName;
+  const Session._();
 
-  /// Empty session which represents an unitialized session.
+ factory Session.fromJson(Map<String, dynamic> json) =>
+      _$SessionFromJson(json);
+
+  /// [Session.empty] represents an unitialized session.
   static const empty = Session(channelName: '');
-
-  @override
-  List<Object?> get props => [channelName];
 }

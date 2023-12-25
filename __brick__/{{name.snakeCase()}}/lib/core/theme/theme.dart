@@ -13,36 +13,36 @@ abstract class AppThemes {
       systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     textTheme: TextTheme(
-      headline1: TextStyle(
+      displayLarge: TextStyle(
         color: AppColors.baseText,
       ),
-      headline2: TextStyle(
+      displayMedium: TextStyle(
         color: AppColors.baseText,
       ),
-      headline3: TextStyle(
+      displaySmall: TextStyle(
         color: AppColors.baseText,
       ),
-      headline4: TextStyle(
+      headlineMedium: TextStyle(
         color: AppColors.baseText,
       ),
-      headline5: TextStyle(
+      headlineSmall: TextStyle(
         color: AppColors.baseText,
         fontWeight: FontWeight.bold,
       ),
-      headline6: TextStyle(
+      titleLarge: TextStyle(
         color: AppColors.baseText,
       ),
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
         color: AppColors.baseText,
         fontSize: 18,
         fontWeight: FontWeight.normal,
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
         color: AppColors.baseText,
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
-      caption: TextStyle(
+      bodySmall: TextStyle(
         color: AppColors.baseText,
         fontSize: 12,
         fontWeight: FontWeight.normal,
@@ -50,8 +50,8 @@ abstract class AppThemes {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        foregroundColor: AppColors.brandBlue,
         minimumSize: const Size.fromHeight(40),
-        primary: AppColors.brandBlue,
         textStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
@@ -69,8 +69,8 @@ abstract class AppThemes {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.brandBlue,
         minimumSize: const Size.fromHeight(40),
-        primary: AppColors.brandBlue,
         side: BorderSide(
           color: AppColors.brandBlue,
         ),

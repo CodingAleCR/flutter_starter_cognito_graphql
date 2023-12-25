@@ -11,7 +11,7 @@ import 'package:{{name.snakeCase()}}/features/auth/auth.dart';
 /// {@endtemplate}
 class HomePage extends StatelessWidget {
   /// {@macro home_page}
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   /// Route creation helper
   static Route<void> route() {
@@ -50,14 +50,14 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 64),
                 Text(
                   AppLocalizations.string(context, Strings.homeGreeting),
-                  style: textTheme.headline5?.copyWith(
+                  style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 24),
                 Text(
                   AppLocalizations.string(context, Strings.homeMessage),
-                  style: textTheme.bodyText1?.copyWith(
+                  style: textTheme.bodyLarge?.copyWith(
                     height: 1.5,
                   ),
                   textAlign: TextAlign.center,

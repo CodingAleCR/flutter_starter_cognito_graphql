@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// {@template app_logo}
-/// Placeholder Logo widget.
+/// {{name.pascalCase()}} Logo widget.
 ///
 /// {@endtemplate}
 class AppLogo extends StatelessWidget {
   /// @macro app_logo
   const AppLogo({
-    Key? key,
+    super.key,
     this.lightMode = false,
-  }) : super(key: key);
+  });
 
   /// Displays light version of the logo.
   final bool lightMode;

@@ -1,1 +1,7 @@
 include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - '*.freezed.dart'
+    - '*.g.dart'
+    - test/_data/**

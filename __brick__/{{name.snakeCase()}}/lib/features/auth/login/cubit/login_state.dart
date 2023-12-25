@@ -4,11 +4,11 @@ part of 'login_cubit.dart';
 /// Represents the state for login cubit.
 ///
 /// {@endtemplate}
-class LoginState extends Equatable {
+class LoginState extends Equatable with FormzMixin {
   /// macro login_state
   const LoginState({
     this.code = const MinLengthInput.pure(),
-    this.status = FormzStatus.pure,
+    this.status = FormzSubmissionStatus.initial,
     this.resendCodeStatus = ResendCodeStatus.idle,
   });
 
@@ -16,7 +16,7 @@ class LoginState extends Equatable {
   final MinLengthInput code;
 
   /// Contains code form information.
-  final FormzStatus status;
+  final FormzSubmissionStatus status;
 
   /// Contains code form information.
   final ResendCodeStatus resendCodeStatus;
@@ -28,10 +28,15 @@ class LoginState extends Equatable {
         resendCodeStatus,
       ];
 
+  @override
+  List<FormzInput<dynamic, dynamic>> get inputs => [
+        code,
+      ];
+
   /// Provides a cloned instance.
   LoginState copyWith({
     MinLengthInput? code,
-    FormzStatus? status,
+    FormzSubmissionStatus? status,
     ResendCodeStatus? resendCodeStatus,
   }) {
     return LoginState(

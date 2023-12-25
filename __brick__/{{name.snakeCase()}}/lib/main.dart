@@ -13,7 +13,7 @@ void main() {
         Provider<AuthService>(create: (_) => AuthServiceImpl()),
         Provider<ConfigService>(create: (_) => ConfigServiceImpl()),
       ],
-      child: const TemplateApp(),
+      child: const {{name.pascalCase()}}App(),
     ),
   );
 }

@@ -20,6 +20,6 @@ class RequiredTextInput extends FormzInput<String, RequiredTextError> {
   // Override validator to handle validating a given input value.
   @override
   RequiredTextError? validator(String? value) {
-    return value?.isNotEmpty == true ? null : RequiredTextError.empty;
+    return value?.isNotEmpty ?? false ? null : RequiredTextError.empty;
   }
 }

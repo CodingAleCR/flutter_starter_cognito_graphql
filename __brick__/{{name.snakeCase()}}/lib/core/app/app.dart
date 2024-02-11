@@ -39,8 +39,8 @@ class {{name.pascalCase()}}App extends StatelessWidget {
 class AppView extends StatefulWidget {
   /// {@macro app_state}
   const AppView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   AppViewState createState() => AppViewState();

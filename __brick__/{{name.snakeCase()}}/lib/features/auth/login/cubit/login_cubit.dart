@@ -1,9 +1,9 @@
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
-import 'package:{{name.snakeCase()}}/core/validation/validation.dart';
-import 'package:{{name.snakeCase()}}/features/auth/login/cubit/resend_code_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:{{name.snakeCase()}}/core/validation/validation.dart';
+import 'package:{{name.snakeCase()}}/features/auth/login/cubit/resend_code_status.dart';
 
 part 'login_state.dart';
 

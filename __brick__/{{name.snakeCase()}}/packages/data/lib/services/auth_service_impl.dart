@@ -132,11 +132,11 @@ class AuthServiceImpl extends AuthService {
       // user is offline.
     }
 
-    // Fetching current participant's information.
-    final currentParticipant =
+    // Fetching current user's information.
+    final currentUser =
         await UserRepository.instance.findByEmail(email: email);
 
-    // Update stream with current participant information.
-    _userController.add(currentParticipant);
+    // Update stream with current user information.
+    _userController.add(currentUser);
   }
 }

@@ -31,13 +31,13 @@ class UserRepository extends GraphQLRepository<User> {
     throw UnimplementedError();
   }
 
-  /// Finding a participant by email
+  /// Finding a user by email
   Future<User> findByEmail({
     required String email,
   }) async {
-    // Fetching current participant's information
+    // Fetching current user's information
     final response = await APIGraphQL.instance.client.query(
-      getParticipantByEmailQuery(email: email),
+      getUserByEmailQuery(email: email),
     );
 
     // Check response's status
@@ -46,16 +46,16 @@ class UserRepository extends GraphQLRepository<User> {
     }
 
     // Parse response to User object.
-    final participants = response.data?['participant'] as List;
+    final users = response.data?['user'] as List;
 
-    // Check if there is at least one participant result
-    if (participants.isEmpty) {
-      throw GraphQLFailure.notFound('Participant not found for email $email');
+    // Check if there is at least one user result
+    if (users.isEmpty) {
+      throw GraphQLFailure.notFound('User not found for email $email');
     }
 
-    final currentParticipant = participants.first as Map<String, dynamic>;
+    final currentUser = users.first as Map<String, dynamic>;
 
-    return MapToUser.fromMap(currentParticipant);
+    return MapToUser.fromMap(currentUser);
   }
 
   @override

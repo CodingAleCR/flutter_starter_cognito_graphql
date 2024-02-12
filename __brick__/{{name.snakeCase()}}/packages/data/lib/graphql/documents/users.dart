@@ -1,8 +1,8 @@
 // ignore_for_file: unnecessary_raw_strings, public_member_api_docs
 
-const getParticipantByEmailDoc = r'''
+const getUserByEmailDoc = r'''
 query GetUserByEmail($vEmail: String) {
-  participant(where: {email: {_eq: $vEmail}}) {
+  users(where: {email: {_eq: $vEmail}}) {
     id
     email
     first_name

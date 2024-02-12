@@ -39,7 +39,7 @@ class AuthFailure implements Exception {
   AuthFailure.apiError(this.message);
 
   /// Convenience constructor for api errors.
-  AuthFailure.notParticipant() : message = 'User is not a participant.';
+  AuthFailure.notUser() : message = 'User is not a user.';
 
   /// Convenience constructor for unknown errors.
   AuthFailure.unknownError(this.message);
